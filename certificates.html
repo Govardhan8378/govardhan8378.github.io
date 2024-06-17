@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="certificates.css">
+    <link rel="stylesheet" href="lightbox.css">
+</head>
+<body>
+<div class="container">
+
+   <a href="index.html" style="text-decoration: none;"> <h1>My Certificates <sub style="font-size: 10px;">link here to go Home</sub></h1></a>
+    <div class="image-container">
+        <div class="image"><img src="greatlearning/programmig basicsjpg.jpg" alt=""></div>
+     <div class="image"><img src="certificatesimg/20221227_084221.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/Certificate_1678933581620.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/edurekaattend.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/foragecybersecurty.jpg" alt=""></div>
+     <div class="image"><img src="certificatesimg/hackerranker.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/internshalamain.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/internshalNSDF.png" alt=""></div>
+     <div class="image"><img src="certificatesimg/Internship+Data+Science+-+15days.jpg" alt=""></div>
+     <div class="image"><img src="certificatesimg/Participation Govardhan.jpg" alt=""></div>
+     <div class="image"><img src="certificatesimg/python participate.png" alt=""></div>
+     <div class="image"><img src="greatlearning/eclipse tutorial.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/frontendcss.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/frontendhtml.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/javaalgorithmsms.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/JavaDSintermediatejpg.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/JDBC.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/multithreadinginjava.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/oopsinjava.jpg" alt=""></div>
+     <div class="image"><img src="greatlearning/treesinjavajpg.jpg" alt=""></div>
+
+    </div>
+
+    <div class="popup-image">
+        <span>&times;</span>
+        <img src="certificatesimg/20221227_084221.png" alt="">
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.image-container img').forEach(image =>{
+      image.onclick =()=>{
+        document.querySelector('.popup-image').style.display='block';
+        document.querySelector('.popup-image img').src=image.getAttribute('src')
+      }
+    });
+    document.querySelector('.popup-image span').onclick =()=>{
+        document.querySelector('.popup-image').style.display='none';
+    }
+    
+    document.addEventListener('DOMContentLoaded', (event) => {
+   document.addEventListener('contextmenu', function(e) {
+       e.preventDefault();
+    });
+});
+</script>
+</body>
+</html>

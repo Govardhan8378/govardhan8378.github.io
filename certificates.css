@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+:root{
+    --bg-color:#080808;
+    --second-bg-color:#131313;
+    --text-color:rgba(255, 255, 255, 0.993);
+    --main-color:#00ffee;
+}
+.container{
+    position: relative;
+    min-height:100vh ;
+    background-color:var(--bg-color);
+}
+.container h1{
+    font-size: 40px;
+    font-family: "poppins",sans-serif;
+    font-weight: normal;
+    padding: 15px;
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    cursor: pointer;
+}
+h1:hover{
+    color: #00ffee;
+    transform: scale(1.1);
+    text-shadow: 0 1px 25px var(--main-color);
+}
+.container .image-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 10px;
+
+}
+.container .image-container .image{
+    height: 250px;
+    width: 350px;
+    border: 5px solid var(--second-bg-color);
+    box-shadow: 0 5px 10px var(--main-color);
+    overflow: hidden;
+    cursor: pointer;
+}
+.container .image-container .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: .2s linear;
+}
+.container .image-container .image:hover img{
+    transform: scale(1.1);
+}
+.container .popup-image{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background :var(--bg-color);
+    height: 100%;
+    width: 100%;
+    z-index:100;
+    display: none;
+}
+.container .popup-image span{
+    position: absolute;
+    top: 0;
+    right: 10px;
+    font-size: 60px;
+    font-weight: bolder;
+    color: #fff;
+    cursor: pointer;
+    z-index:100;
+}
+.container .popup-image img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%,-50%) ;
+    border:5px solid var(--bg-color);
+    border-radius: 5px;
+    width: 750px;
+    object-fit: cover;
+}
+@media (max-width:768px) {
+    .container .popup-image img{
+        width:95px;
+
+    }
+    
+}
