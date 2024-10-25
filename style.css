@@ -227,7 +227,7 @@ transition: 0.3s ease-in-out;
 }
 @keyframes words {
     0%,20%{
-        content: "Fronted Designer";
+        content: "Frontend Designer";
     }
     21%,40%{
         content: "Python Programmer";
