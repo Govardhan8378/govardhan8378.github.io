@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML DAY 2</title>
+    <style>
+        p{
+            font-size: x-large;
+        }
+        img{
+            width: 70%;
+            height: auto;  
+            margin-left: 20px; 
+        }
+        h1{
+            text-decoration: underline;
+        }
+        ul{
+            padding: 20px;
+        }
+        .lists li{
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        li{
+            margin-left: 13px;
+        }
+        .hone{
+            
+            color: black;
+            text-shadow: 5px 4px 5px rgb(128, 120, 120); 
+            border-bottom: 1px solid ;
+            text-decoration: none;
+        }
+        a{
+            text-decoration: none;
+            color: rgb(255, 247, 0);
+            position: fixed;
+            border: 1px solid rgb(20, 20, 20);
+            width: auto;
+            height: auto;
+            text-align: center;
+            border-radius: 20px;
+            background-color: rgb(231, 14, 14);
+            margin: 0;
+        }
+    </style>
+    <script>
+        var times=prompt("Enter your Time in m/s like 1=1000m/s:");
+        function redirectAfterTimeout()
+        {
+            setTimeout(function() 
+            {
+            window.location.href = "main.html"; 
+            }, times); 
+        }
+        window.onload = redirectAfterTimeout;
+    </script>
+</head>
+<body>
+    <center><h1 class="hone">HTML/CSS/JS/REACT</h1></center><h1></h1>
+    <a href="main.html">HOME</a>
+    <center><h1>Topic 1: HTML Styles</h1></center>
+    <p style="margin-left: 20px;">HTML style attribute is used to add styles to an element, such as color, font, size, and more.</p>
+    <h1>The HTML Style Attribute</h1>
+    <ul>
+        <li >Setting the style of an HTML element can be done with the style attribute</li>
+        <li>The HTML style attribute has the following syntax:</li>
+    </ul>
+        <div>
+            <p>Example:</p>
+            <img src="htmlimg/html6.png" alt="">
+        </div>
+    <h1>Background Colour</h1>
+    <ul><li>The CSS <i style="background-color: rgb(185, 178, 171); color: red;">background-color</i> property defines the background color for an HTML element</li></ul>
+    <div><p>Example:</p><img src="htmlimg/html7.png" alt=""></div>
+    <h1>Text Color</h1>
+    <ul><li>The CSS <i style="background-color: rgb(198, 193, 188); color: red;">color</i> property defines the text color for an HTML element.</li></ul>
+    <div><p>Example:</p>
+    <img src="htmlimg/html8.png" alt=""></div>
+    <h1> Fonts</h1>
+    <ul ><li>The CSS font-family property defines the font to be used for an HTML element:</li></ul>
+    <div><p>Example:</p><img src="htmlimg/html9.png" alt=""></div>
+    <center><h1>Topic 2: HTML Text Formatting</h1></center>
+    <p>👉 HTML contains several elements for defining text with a special meaning.</p>
+    <br>
+    <p>👉 Formatting elements were designed to display special types of text:</p>
+    <ul class="lists">
+    <li>&lt;b&gt; - Bold text</li>
+    <li>&lt;strong&gt; - Important text</li>
+    <li>&lt;i&gt; - Italic text</li>
+    <li>&lt;em&gt; - Emphasized text</li>
+    <li>&lt;mark&gt;- Marked text</li>
+    <li>&lt;small&gt; - Smaller text</li>
+    <li>&lt;del&gt; - Deleted text</li>
+    <li>&lt;ins&gt; - Inserted text</li>
+    <li>&lt;sub&gt; - Subscript text/li>
+    <li>&lt;sup&gt; - Superscript text</li></ul>
+    <div><p>Example:</p><img src="htmlimg/html10.png" alt=""></div>
+    <center><h1>Topic 4: HTML Quotation</h1></center>
+    <h1>👉 HTML &lt;q&gt; for Short Quotations</h1>
+    <ul><li>The HTML &lt;q&gt; tag defines a short quotation.</li>
+    <li>Browsers normally insert quotation marks around the quotation.</li></ul>
+    <div><p>Example:</p><img src="ihtmlimg/html12.png" alt=""></div>
+    <h1>👉 HTML &lt;blockquote&gt; for Quotations</h1>
+    <ul><li>The HTML &lt;blockquote&gt; element defines a section that is quoted from another source</li><li>Browsers usually indent &lt;blockquote&gt; elements.</li></ul>
+    <div><p>Example:</p>
+    <img src="htmlimg/html13.png" alt=""></div>
+    <ul><li>Note: A person's name is not the title of a work.</li>
+    <li>The text in the &lt;cite&gt; element usually renders in italic.</li></ul>
+    <h1>👉 HTML  &lt;abbr&gt; for Abbreviations</h1>
+    <ul><li>The HTML &lt;abbr&gt; tag defines an abbreviation or an acronym, like "HTML", "CSS", "Mr.", "Dr.", "ASAP", "ATM".</li><li>Marking abbreviations can give useful information to browsers, translation systems and search-engines.</li></ul>
+    <div><p>Example:</p><img src="htmlimg/html14.png" alt=""></div>
+    <h1>👉 HTML &lt;address&gt; for Contact Information</h1>
+    <ul><li>The HTML &lt;address&gt; tag defines the contact information for the author/owner of a document or an article.</li>
+    <li>The contact information can be an email address, URL, physical address, phone number, social media handle, etc.</li>
+    <li>- The text in the `&lt;address&gt;` element usually renders in italic, and browsers will always add a line break before and after the `&lt;address&gt;` element.</li></ul>
+    <div><p>Example:</p><img src="htmlimg/html15.png" alt=""></div>
+
+
+</body>
+
+</html>
