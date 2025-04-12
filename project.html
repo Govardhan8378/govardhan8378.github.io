@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Projects</title>
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #000; /* Black background */
+      color: #f1f1f1; /* Light text for contrast */
+      line-height: 1.6;
+    }
+
+    .header {
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: white;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #1c1c1c;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease;
+      height: 100%;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      padding: 1.2rem;
+    }
+
+    .project-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #4b6cb7;
+    }
+
+    .project-info p {
+      margin-bottom: 0.8rem;
+      color: #ccc;
+      flex-grow: 1;
+    }
+
+    .project-info p strong {
+      color: #f1f1f1;
+    }
+
+    .project-info a {
+      text-decoration: none;
+      color: white;
+      background: #4b6cb7;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      align-self: flex-start;
+      transition: background 0.3s ease;
+    }
+
+    .project-info a:hover {
+      background: #182848;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 1rem;
+      background: #111;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+   <a style="text-decoration: none; color: white;" href="index.html"><h1>My Project Showcase</h1></a> 
+    <p>Explore some of my favorite projects</p>
+  </header>
+
+  <section class="projects-container">
+
+    <div class="project-card">
+      <img src="./img/farmmanagement.png" alt="Project 1">
+      <div class="project-info">
+        <h3>Farm Management System</h3>
+        <p><strong>Description:</strong> AI-powered system to recommend crops, fertilizers, and market prices using real-time and historical data.</p>
+        <p><strong>Technologies Used:</strong> Python, Streamlit, Pandas, NumPy, Machine Learning</p>
+        <a href="https://github.com/Govardhan8378/farm_management_system" target="_blank">View Project in GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="./img/chatbot.png" alt="Project 2">
+      <div class="project-info">
+        <h3>Chatbot + E-Commerce</h3>
+        <p><strong>Description:</strong> Full-stack shopping site with product search, order tracking, admin dashboard, and AI-powered chatbot.</p>
+        <p><strong>Technologies Used:</strong> React, Node.js, MongoDB, Express, Cohere AI, Stripe</p>
+        <a href="https://dulcet-hummingbird-93536f.netlify.app/" target="_blank">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="./img/pglife.png" alt="Project 3">
+      <div class="project-info">
+        <h3>PG Life - Rental Platform</h3>
+        <p><strong>Description:</strong> Java-based application for booking PGs with rental history, damage report, and fine calculation.</p>
+        <p><strong>Technologies Used:</strong> HTML, CSS, JavaScript, MySQL,php</p>
+        <a href="http://pglifebygg.free.nf/" target="_blank">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="./img/portfolio.png" alt="Project 4">
+      <div class="project-info">
+        <h3>Portfolio Website</h3>
+        <p><strong>Description:</strong> Personal website to showcase projects, skills, education, and contact information.</p>
+        <p><strong>Technologies Used:</strong> HTML, CSS, JavaScript, GitHub Pages</p>
+        <a href="https://govardhan8378.github.io/" target="_blank">View Project</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="./img/busbooking.png" alt="Project 5">
+      <div class="project-info">
+        <h3>Bus Booking System</h3>
+        <p><strong>Description:</strong>A Java-MySQL based console app for booking, canceling, and managing bus tickets with admin controls.</p>
+        <p><strong>Technologies Used:</strong> Java, JDBC, MySQL, OOP Concepts</p>
+        <a href="https://github.com/Govardhan8378/AJP_Project" target="_blank">View Project in GitHub</a>
+      </div>
+    </div>
+
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Sravya. All rights reserved.</p>
+  </footer>
+</body>
+</html>
