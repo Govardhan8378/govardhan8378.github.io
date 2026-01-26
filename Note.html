@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GitHub Dictionary</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* CARD */
+.card {
+  width: 900px;
+  background: #fff;
+  margin: 60px auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+}
+
+/* LOGIN */
+#login h2 {
+  text-align: center;
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #2c5364;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background: #203a43;
+}
+#error {
+  color: red;
+  text-align: center;
+}
+
+/* APP */
+#app {
+  display: none;
+}
+.top-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.top-bar input {
+  flex: 1;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th {
+  background: #2c5364;
+  color: white;
+  padding: 10px;
+}
+td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+tr:hover {
+  background: #f2f2f2;
+}
+.action-btn {
+  margin-right: 5px;
+  font-size: 13px;
+}
+.delete {
+  background: #c0392b;
+}
+.delete:hover {
+  background: #a93226;
+}
+.export {
+  background: #27ae60;
+}
+.export:hover {
+  background: #1e8449;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="card" id="login">
+  <h2>🔐 Dictionary Login</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="error"></p>
+</div>
+
+<!-- APP -->
+<div class="card" id="app">
+  <h2>📘 My Dictionary</h2>
+
+  <div class="top-bar">
+    <input id="word" placeholder="Word">
+    <input id="meaning" placeholder="Meaning">
+    <button onclick="addWord()">Add</button>
+  </div>
+
+  <div class="top-bar">
+    <input id="search" placeholder="Search..." onkeyup="searchWords()">
+    <button class="export" onclick="exportCSV()">Export CSV</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Word</th>
+        <th>Meaning</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</div>
+
+<script>
+/* LOGIN */
+const LOGIN_USER = "admin";
+const LOGIN_PASS = "1234";
+
+/* GITHUB CONFIG */
+const USERNAME = "Govardhan8378";
+const REPO = "govardhan8378.github.io";
+const FILE = "dictionary.json";
+const TOKEN = "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";
+
+const API = `https://api.github.com/repos/${USERNAME}/${REPO}/contents/${FILE}`;
+
+let sha = "";
+let allData = [];
+
+/* LOGIN */
+function login() {
+  if (user.value === LOGIN_USER && pass.value === LOGIN_PASS) {
+    loginBox.style.display = "none";
+    app.style.display = "block";
+    loadData();
+  } else {
+    error.innerText = "Invalid credentials";
+  }
+}
+
+/* LOAD */
+async function loadData() {
+  const res = await fetch(API, {
+    headers: { Authorization: `token ${TOKEN}` }
+  });
+  const data = await res.json();
+  sha = data.sha;
+  allData = JSON.parse(atob(data.content));
+  render(allData);
+}
+
+/* RENDER */
+function render(data) {
+  tableBody.innerHTML = "";
+  data.forEach((d, i) => {
+    tableBody.innerHTML += `
+      <tr>
+        <td>${i + 1}</td>
+        <td><b>${d.word}</b></td>
+        <td>${d.meaning}</td>
+        <td>${d.time}</td>
+        <td>
+          <button class="action-btn" onclick="editWord(${i})">Edit</button>
+          <button class="action-btn delete" onclick="deleteWord(${i})">Delete</button>
+        </td>
+      </tr>
+    `;
+  });
+}
+
+/* ADD */
+async function addWord() {
+  if (!word.value || !meaning.value) return;
+
+  allData.unshift({
+    word: word.value,
+    meaning: meaning.value,
+    time: new Date().toLocaleString()
+  });
+
+  await save();
+  word.value = "";
+  meaning.value = "";
+}
+
+/* EDIT */
+async function editWord(index) {
+  const w = prompt("Edit word", allData[index].word);
+  const m = prompt("Edit meaning", allData[index].meaning);
+  if (w && m) {
+    allData[index].word = w;
+    allData[index].meaning = m;
+    await save();
+  }
+}
+
+/* DELETE */
+async function deleteWord(index) {
+  if (confirm("Delete this word?")) {
+    allData.splice(index, 1);
+    await save();
+  }
+}
+
+/* SAVE */
+async function save() {
+  await fetch(API, {
+    method: "PUT",
+    headers: {
+      Authorization: `token ${TOKEN}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: "Update dictionary",
+      content: btoa(JSON.stringify(allData, null, 2)),
+      sha: sha
+    })
+  });
+  loadData();
+}
+
+/* SEARCH */
+function searchWords() {
+  const q = search.value.toLowerCase();
+  const filtered = allData.filter(d =>
+    d.word.toLowerCase().includes(q) ||
+    d.meaning.toLowerCase().includes(q)
+  );
+  render(filtered);
+}
+
+/* EXPORT CSV */
+function exportCSV() {
+  let csv = "Word,Meaning,Date\n";
+  allData.forEach(d => {
+    csv += `"${d.word}","${d.meaning}","${d.time}"\n`;
+  });
+
+  const blob = new Blob([csv], { type: "text/csv" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "dictionary.csv";
+  a.click();
+}
+
+/* ELEMENTS */
+const loginBox = document.getElementById("login");
+const app = document.getElementById("app");
+const tableBody = document.getElementById("tableBody");
+const word = document.getElementById("word");
+const meaning = document.getElementById("meaning");
+const search = document.getElementById("search");
+const user = document.getElementById("user");
+const pass = document.getElementById("pass");
+const error = document.getElementById("error");
+</script>
+
+</body>
+</html>
