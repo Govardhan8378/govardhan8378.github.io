@@ -9,17 +9,10 @@
             background: #f4f6f8;
             padding: 15px;
         }
-        h1 {
-            text-align: center;
-        }
-        .controls {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        input, button {
-            padding: 8px;
-            margin: 4px;
-        }
+        h1 { text-align: center; }
+        .controls { text-align: center; margin-bottom: 15px; }
+        input, button { padding: 8px; margin: 4px; }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -65,7 +58,12 @@
 </table>
 
 <script>
-let players = [];
+let players = JSON.parse(localStorage.getItem("leastGamePlayers")) || [];
+
+// 🔹 SAVE TO LOCAL STORAGE
+function saveData() {
+    localStorage.setItem("leastGamePlayers", JSON.stringify(players));
+}
 
 function addPlayer() {
     const name = document.getElementById("playerName").value.trim();
@@ -73,6 +71,7 @@ function addPlayer() {
 
     players.push({ name: name, scores: [] });
     document.getElementById("playerName").value = "";
+    saveData();
     renderTable();
 }
 
@@ -83,6 +82,8 @@ function addScore(index) {
 
     players[index].scores.push(value);
     input.value = "";
+    checkElimination(index);
+    saveData();
     renderTable();
 }
 
@@ -93,11 +94,24 @@ function subScore(index) {
 
     players[index].scores.push(-value);
     input.value = "";
+    checkElimination(index);
+    saveData();
     renderTable();
 }
 
 function getTotal(scores) {
     return scores.reduce((a, b) => a + b, 0);
+}
+
+function checkElimination(index) {
+    if (!players[index]) return;
+    const total = getTotal(players[index].scores);
+
+    if (total >= 100) {
+        const name = players[index].name;
+        alert(name + " is eliminated (score ≥ 100)");
+        players.splice(index, 1);
+    }
 }
 
 function getLowestScore() {
@@ -108,6 +122,7 @@ function getLowestScore() {
 function resetGame() {
     if (confirm("Reset entire game?")) {
         players = [];
+        localStorage.removeItem("leastGamePlayers");
         renderTable();
     }
 }
@@ -143,6 +158,9 @@ function renderTable() {
         tbody.appendChild(row);
     });
 }
+
+// 🔹 INITIAL RENDER (RESTORE DATA)
+renderTable();
 </script>
 
 </body>
