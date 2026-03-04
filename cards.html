@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Least Number Game Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 15px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .controls {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        input, button {
+            padding: 8px;
+            margin: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .winner {
+            background-color: #d4edda;
+            font-weight: bold;
+        }
+        .scores-list {
+            font-size: 13px;
+            color: #555;
+        }
+        .btn-add { background: #28a745; color: white; }
+        .btn-sub { background: #dc3545; color: white; }
+    </style>
+</head>
+<body>
+
+<h1>🎴 Least Number Game</h1>
+
+<div class="controls">
+    <input type="text" id="playerName" placeholder="Enter player name">
+    <button onclick="addPlayer()">Add Player</button>
+    <button onclick="resetGame()">Reset Game</button>
+</div>
+
+<table id="scoreTable">
+    <thead>
+        <tr>
+            <th>Player</th>
+            <th>Score Action</th>
+            <th>Round Scores</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script>
+let players = [];
+
+function addPlayer() {
+    const name = document.getElementById("playerName").value.trim();
+    if (!name) return;
+
+    players.push({ name: name, scores: [] });
+    document.getElementById("playerName").value = "";
+    renderTable();
+}
+
+function addScore(index) {
+    const input = document.getElementById(`score-${index}`);
+    const value = Number(input.value);
+    if (isNaN(value)) return;
+
+    players[index].scores.push(value);
+    input.value = "";
+    renderTable();
+}
+
+function subScore(index) {
+    const input = document.getElementById(`score-${index}`);
+    const value = Number(input.value);
+    if (isNaN(value)) return;
+
+    players[index].scores.push(-value);
+    input.value = "";
+    renderTable();
+}
+
+function getTotal(scores) {
+    return scores.reduce((a, b) => a + b, 0);
+}
+
+function getLowestScore() {
+    if (players.length === 0) return null;
+    return Math.min(...players.map(p => getTotal(p.scores)));
+}
+
+function resetGame() {
+    if (confirm("Reset entire game?")) {
+        players = [];
+        renderTable();
+    }
+}
+
+function formatScores(scores) {
+    if (!scores.length) return "-";
+    return scores.map(s => s > 0 ? "+" + s : s).join(", ");
+}
+
+function renderTable() {
+    const tbody = document.querySelector("#scoreTable tbody");
+    tbody.innerHTML = "";
+
+    const lowest = getLowestScore();
+
+    players.forEach((player, index) => {
+        const total = getTotal(player.scores);
+        const isWinner = total === lowest && players.length > 0;
+
+        const row = document.createElement("tr");
+        if (isWinner) row.classList.add("winner");
+
+        row.innerHTML = `
+            <td>${player.name}</td>
+            <td>
+                <input type="number" id="score-${index}" placeholder="score">
+                <button class="btn-add" onclick="addScore(${index})">+ Add</button>
+                <button class="btn-sub" onclick="subScore(${index})">− Sub</button>
+            </td>
+            <td class="scores-list">${formatScores(player.scores)}</td>
+            <td>${total}</td>
+        `;
+        tbody.appendChild(row);
+    });
+}
+</script>
+
+</body>
+</html>
