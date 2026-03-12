@@ -108,7 +108,7 @@ function checkElimination(index) {
     if (!players[index]) return;
     const total = getTotal(players[index].scores);
 
-    if (total >= 100) {
+    if (total >= 500) {
         const name = players[index].name;
         alert(name + " is eliminated (score ≥ 100)");
         players.splice(index, 1);
